@@ -3,7 +3,7 @@ import { getMessage, log } from "./log.js";
 
 const server = fastify();
 
-server.get("/ping", async (request, reply) => {
+server.get("/ping", async () => {
   return getMessage();
 });
 

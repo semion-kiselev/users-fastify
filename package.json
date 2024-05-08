@@ -11,7 +11,9 @@
     "prepare": "husky",
     "type:check": "tsc --noEmit",
     "format:check": "prettier 'src/**/*.{ts,json}' --check",
-    "format:fix": "prettier 'src/**/*.{ts,json}' --write"
+    "format:fix": "prettier 'src/**/*.{ts,json}' --write",
+    "lint:check": "eslint 'src/**/*.{ts,json}'",
+    "lint:fix": "eslint 'src/**/*.{ts,json}' --fix"
   },
   "author": "",
   "license": "ISC",
@@ -19,14 +21,18 @@
     "fastify": "4.26.2"
   },
   "devDependencies": {
+    "@eslint/js": "9.2.0",
     "@tsconfig/node22": "22.0.0",
     "@types/node": "20.12.10",
+    "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
+    "globals": "15.1.0",
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",
     "prettier-plugin-organize-imports": "3.2.4",
     "tsx": "4.9.3",
-    "typescript": "5.4.5"
+    "typescript": "5.4.5",
+    "typescript-eslint": "7.8.0"
   }
 }
