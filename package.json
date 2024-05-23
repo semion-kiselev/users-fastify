@@ -1,29 +1,32 @@
 {
-  "name": "users-fastify",
+  "name": "users-node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "tsx watch ./src/server.ts",
-    "build": "tsc -p tsconfig.json",
+    "build": "swc src -d dist",
     "prod": "node dist/server.js",
-    "prepare": "husky",
     "type:check": "tsc --noEmit",
     "format:check": "prettier 'src/**/*.{ts,json}' --check",
     "format:fix": "prettier 'src/**/*.{ts,json}' --write",
     "lint:check": "eslint 'src/**/*.{ts,json}'",
-    "lint:fix": "eslint 'src/**/*.{ts,json}' --fix"
+    "lint:fix": "eslint 'src/**/*.{ts,json}' --fix",
+    "prepare": "husky"
   },
-  "author": "",
+  "author": "Siamion Kisialiou",
   "license": "ISC",
   "dependencies": {
-    "fastify": "4.26.2"
+    "pg": "8.11.5",
+    "pg-format": "1.0.4"
   },
   "devDependencies": {
     "@eslint/js": "9.2.0",
-    "@tsconfig/node22": "22.0.0",
+    "@swc/cli": "0.3.12",
+    "@swc/core": "1.5.7",
     "@types/node": "20.12.10",
+    "@types/pg": "8.11.6",
+    "@types/pg-format": "1.0.5",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
     "globals": "15.1.0",
@@ -33,6 +36,7 @@
     "prettier-plugin-organize-imports": "3.2.4",
     "tsx": "4.9.3",
     "typescript": "5.4.5",
-    "typescript-eslint": "7.8.0"
+    "typescript-eslint": "7.8.0",
+    "zod": "3.23.8"
   }
 }
