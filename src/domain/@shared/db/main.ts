@@ -38,9 +38,9 @@ type ExecWithConfig = {
 const execWithConfig = async <R extends QueryResultRow>({ client, config }: ExecWithConfig) =>
   (client || pool).query<R>(config);
 
-type TransactOperations = (client: PoolClient, commit: () => Promise<QueryResult>) => Promise<void>;
+type TransactOperations<T> = (client: PoolClient, commit: () => Promise<QueryResult>) => Promise<T>;
 
-const transact = async (cb: TransactOperations) => {
+const transact = async <T>(cb: TransactOperations<T>) => {
   const client = await pool.connect();
 
   try {

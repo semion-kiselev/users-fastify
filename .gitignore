@@ -6,4 +6,4 @@ npm-debug.log*
 .DS_Store
 /coverage
 /.idea
-.env
+src/app/.env
