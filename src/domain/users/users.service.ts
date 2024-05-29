@@ -37,18 +37,21 @@ export const getUsers = async (): Promise<User[]> => {
   return result.map(toCamelCase) as User[];
 };
 
-export const getUser = async (id: number, getNotFoundError: () => never) => {
+export const getUser = async (id: number): Promise<User | null> => {
   const result = await db.exec<UserWithPermissionsFromDb>({ sql: getUserSql, values: [id] });
 
   if (result.rows.length === 0) {
-    throw getNotFoundError();
+    return null;
   }
 
   const user = result.rows[0];
   return toCamelCase(user) as User;
 };
 
-export const getUserByCredentials = async (login: string, password: string) => {
+export const getUserByCredentials = async (
+  login: string,
+  password: string
+): Promise<User | null> => {
   const result = await db.exec<UserWithPermissionsFromDb>({
     sql: getUserByCredentialsSql,
     values: [login, password],
@@ -88,7 +91,6 @@ export const createUser = async ({
 export const updateUser = async (
   id: number,
   { name, email, password, permissions }: UpdateUserPayload,
-  getNotFoundError: () => never
 ): Promise<User> => {
   return db.transact(async (client: PoolClient, commit) => {
     const [formattedSql, values] = getSqlWithValuesForUpdate(
@@ -105,7 +107,8 @@ export const updateUser = async (
     const updateResult = await client.query<UserFromDb>(formattedSql, values);
 
     if (updateResult.rowCount === 0) {
-      throw getNotFoundError();
+      // todo: ?
+      throw new Error();
     }
 
     const user = updateResult.rows[0];
@@ -135,15 +138,15 @@ export const updateUser = async (
   });
 };
 
-export const deleteUser = async (id: number, getNotFoundError: () => never) => {
+export const deleteUser = async (id: number): Promise<{ ok: true } | null> => {
   const result = await db.exec({
     sql: deleteUserSql,
     values: [id],
   });
 
   if (result.rowCount === 0) {
-    throw getNotFoundError();
+    return null;
   }
 
-  return null;
+  return { ok: true };
 };

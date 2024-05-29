@@ -1,4 +1,6 @@
-import { Pool, type PoolClient, type QueryConfig, type QueryResult, type QueryResultRow } from "pg";
+import pg, { type PoolClient, type QueryConfig, type QueryResult, type QueryResultRow } from "pg";
+
+const { Pool } = pg;
 
 const pool = new Pool({
   user: process.env.DB_USER,

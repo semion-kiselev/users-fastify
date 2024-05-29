@@ -8,3 +8,5 @@ export const CreateUserPayloadSchema = z.object({
 });
 
 export const UpdateUserPayloadSchema = CreateUserPayloadSchema.partial();
+
+export const UserIdSchema = z.number().positive().max(2147483647);

@@ -17,6 +17,9 @@
   "author": "Siamion Kisialiou",
   "license": "ISC",
   "dependencies": {
+    "@hono/node-server": "1.11.1",
+    "hono": "4.4.0",
+    "http-status-codes": "2.3.0",
     "pg": "8.11.5",
     "pg-format": "1.0.4"
   },
