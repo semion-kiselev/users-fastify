@@ -1,7 +1,7 @@
-import type { EnvVariables } from "app/@shared/types/env.ts";
-import { auth } from "app/auth/auth.routes.ts";
-import { permissions } from "app/permissions/permissions.routes.ts";
-import { users } from "app/users/users.routes.ts";
+import type { EnvVariables } from "app/@shared/types/env";
+import { auth } from "app/auth/auth.routes";
+import { permissions } from "app/permissions/permissions.routes";
+import { users } from "app/users/users.routes";
 import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { getReasonPhrase } from "http-status-codes";

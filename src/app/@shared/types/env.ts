@@ -1,4 +1,4 @@
-import type { TokenUser } from "domain/auth/auth.types.ts";
+import type { TokenUser } from "domain/auth/auth.types";
 
 export type EnvVariables = {
   user?: TokenUser;

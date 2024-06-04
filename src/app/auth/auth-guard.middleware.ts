@@ -1,15 +1,15 @@
-import { raiseForbidden, raiseServerError, raiseUnauthorized } from "app/@shared/errors/main.ts";
-import { Permission } from "domain/auth/auth.constants.ts";
-import type { TokenPayload, TokenUser } from "domain/auth/auth.types.ts";
-import { getUserTokenExpirationTime } from "domain/users/users.service.ts";
+import { raiseForbidden, raiseServerError, raiseUnauthorized } from "app/@shared/errors/main";
+import type { EnvVariables } from "app/@shared/types/env";
+import { Permission } from "domain/auth/auth.constants";
+import type { TokenPayload, TokenUser } from "domain/auth/auth.types";
+import { getUserTokenExpirationTime } from "domain/users/users.service";
 import { createMiddleware } from "hono/factory";
 import { verify } from "hono/jwt";
-import type { EnvVariables } from "app/@shared/types/env.ts";
 
 export const authGuard = (requiredPermissions: Permission[]) =>
   createMiddleware<{ Variables: EnvVariables }>(async (c, next) => {
     const { ACCESS_TOKEN_SECRET } = process.env;
-    if (ACCESS_TOKEN_SECRET) {
+    if (!ACCESS_TOKEN_SECRET) {
       raiseServerError();
     }
 
@@ -22,8 +22,6 @@ export const authGuard = (requiredPermissions: Permission[]) =>
     const payload = (await verify(token, ACCESS_TOKEN_SECRET).catch(() => {
       raiseUnauthorized();
     })) as TokenPayload;
-
-    console.log({ payload });
 
     const user: TokenUser = {
       id: payload.sub,
@@ -42,6 +40,7 @@ export const authGuard = (requiredPermissions: Permission[]) =>
 
     if (Array.isArray(requiredPermissions) && requiredPermissions.length === 0) {
       await next();
+      return;
     }
 
     const areAllPermissionsExist = requiredPermissions.every((permission) =>
@@ -50,6 +49,7 @@ export const authGuard = (requiredPermissions: Permission[]) =>
 
     if (areAllPermissionsExist) {
       await next();
+      return;
     }
 
     raiseForbidden();

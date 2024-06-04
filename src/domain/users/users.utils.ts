@@ -1,5 +1,5 @@
-import { omit, toCamelCase } from 'domain/@shared/utils/lib.js';
-import { type UserWithPermissionsFromDb, type User } from 'domain/users/users.types.js';
+import { omit, toCamelCase } from "domain/@shared/utils/lib";
+import { type User, type UserWithPermissionsFromDb } from "domain/users/users.types";
 
 export const normalizeUser = (user: UserWithPermissionsFromDb) =>
-  toCamelCase(omit(user, ['token_expired_at', 'password'])) as User;
+  toCamelCase(omit(user, ["token_expired_at", "password"])) as User;

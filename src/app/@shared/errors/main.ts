@@ -1,4 +1,4 @@
-import { type StatusCode } from "app/@shared/types/status-code.ts";
+import { type StatusCode } from "app/@shared/types/status-code";
 import { HTTPException } from "hono/http-exception";
 import { getReasonPhrase } from "http-status-codes";
 import type { ZodIssue } from "zod";

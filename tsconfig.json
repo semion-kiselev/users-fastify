@@ -10,9 +10,8 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "isolatedModules": true,
-    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "baseUrl": "src"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*"]
 }

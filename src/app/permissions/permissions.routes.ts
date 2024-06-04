@@ -1,5 +1,5 @@
+import { getPermissions } from "domain/permissions/permissions.service";
 import { Hono } from "hono";
-import { getPermissions } from "domain/permissions/permissions.service.ts";
 
 export const permissions = new Hono();
 

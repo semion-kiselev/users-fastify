@@ -1,5 +1,5 @@
-import { db } from "domain/@shared/db/main.js";
-import type { Permission } from "domain/permissions/permissions.types.js";
+import { db } from "domain/@shared/db/main";
+import type { Permission } from "domain/permissions/permissions.types";
 
 export const getPermissions = (): Promise<Permission[]> =>
   db.getRows<Permission>({

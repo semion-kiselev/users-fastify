@@ -1,18 +1,12 @@
-import { raiseNotFound } from "app/@shared/errors/main.ts";
-import { applyValidation } from "app/@shared/utils/apply-validation.ts";
-import { authGuard } from "app/auth/auth-guard.middleware.ts";
-import { UserIdParamSchema } from "app/users/users.schemas.ts";
-import { CreateUserPayloadSchema, UpdateUserPayloadSchema } from "domain/users/users.schemas.ts";
-import {
-  createUser,
-  deleteUser,
-  getUser,
-  getUsers,
-  updateUser,
-} from "domain/users/users.service.ts";
+import { raiseNotFound } from "app/@shared/errors/main";
+import { applyValidation } from "app/@shared/utils/apply-validation";
+import { authGuard } from "app/auth/auth-guard.middleware";
+import { UserIdParamSchema } from "app/users/users.schemas";
+import { Permission } from "domain/auth/auth.constants";
+import { CreateUserPayloadSchema, UpdateUserPayloadSchema } from "domain/users/users.schemas";
+import { createUser, deleteUser, getUser, getUsers, updateUser } from "domain/users/users.service";
 import { Hono } from "hono";
 import { validator } from "hono/validator";
-import { Permission } from "../../domain/auth/auth.constants.ts";
 
 export const users = new Hono();
 

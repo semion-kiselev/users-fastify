@@ -1,7 +1,7 @@
-import { db } from "domain/@shared/db/main.js";
-import type { LoginPayload, TokenPayloadBase } from "domain/auth/auth.types.ts";
-import { getUserByCredentials } from "domain/users/users.service.ts";
-import { expireUserTokenSql } from "domain/auth/auth.sql.ts";
+import { db } from "domain/@shared/db/main";
+import { expireUserTokenSql } from "domain/auth/auth.sql";
+import type { LoginPayload, TokenPayloadBase } from "domain/auth/auth.types";
+import { getUserByCredentials } from "domain/users/users.service";
 
 export const login = async (
   { email, password }: LoginPayload,
@@ -27,6 +27,6 @@ export const login = async (
 };
 
 export const logout = async (userId: number) => {
-  await db.exec({ sql: expireUserTokenSql,values: [userId] });
+  await db.exec({ sql: expireUserTokenSql, values: [userId] });
   return {};
 };

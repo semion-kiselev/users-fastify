@@ -1,12 +1,12 @@
-import { raiseServerError, raiseUnauthorized } from "app/@shared/errors/main.ts";
-import { applyValidation } from "app/@shared/utils/apply-validation.ts";
-import { login, logout } from "domain/auth/auth.serivce.ts";
+import { raiseServerError, raiseUnauthorized } from "app/@shared/errors/main";
+import { applyValidation } from "app/@shared/utils/apply-validation";
+import { LoginSchema, LogoutSchema } from "domain/auth/auth.schemas";
+import { login, logout } from "domain/auth/auth.serivce";
+import type { TokenPayloadBase } from "domain/auth/auth.types";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
 import { validator } from "hono/validator";
 import * as process from "process";
-import { LoginSchema, LogoutSchema } from "../../domain/auth/auth.schemas.ts";
-import type { TokenPayloadBase } from "../../domain/auth/auth.types.ts";
 
 export const auth = new Hono();
 
@@ -21,8 +21,10 @@ auth.post(
       raiseServerError();
     }
 
-    const exp = Math.floor(Date.now() / 1000) + Number(ACCESS_TOKEN_EXPIRATION_SECONDS);
-    const signToken = (payload: TokenPayloadBase) => sign({ ...payload, exp }, ACCESS_TOKEN_SECRET);
+    const iat = Math.floor(Date.now() / 1000);
+    const exp = iat + Number(ACCESS_TOKEN_EXPIRATION_SECONDS);
+    const signToken = (payload: TokenPayloadBase) =>
+      sign({ ...payload, exp, iat }, ACCESS_TOKEN_SECRET);
 
     const { token } = await login(payload, raiseUnauthorized, signToken);
     return c.json({ token });
