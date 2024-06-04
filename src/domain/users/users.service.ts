@@ -9,6 +9,7 @@ import {
   getUserByCredentialsSql,
   getUserPermissionsSql,
   getUserSql,
+  getUserTokenExpirationTimeSql,
   getUsersSql,
   removeUserPermissionsSql,
   updateUserSql,
@@ -37,11 +38,11 @@ export const getUsers = async (): Promise<User[]> => {
   return result.map(toCamelCase) as User[];
 };
 
-export const getUser = async (id: number): Promise<User | null> => {
+export const getUser = async (id: number, raiseNotFound: () => never): Promise<User | null> => {
   const result = await db.exec<UserWithPermissionsFromDb>({ sql: getUserSql, values: [id] });
 
   if (result.rows.length === 0) {
-    return null;
+    raiseNotFound();
   }
 
   const user = result.rows[0];
@@ -58,6 +59,14 @@ export const getUserByCredentials = async (
   });
   const user = result.rows.length === 0 ? null : result.rows[0];
   return user ? (toCamelCase(user) as User) : null;
+};
+
+export const getUserTokenExpirationTime = async (userId: number) => {
+  const { token_expired_at } = await db.getRow<{ token_expired_at: string }>({
+    sql: getUserTokenExpirationTimeSql,
+    values: [userId],
+  });
+  return Math.ceil(new Date(token_expired_at).getTime() / 1000);
 };
 
 export const createUser = async ({
@@ -91,6 +100,7 @@ export const createUser = async ({
 export const updateUser = async (
   id: number,
   { name, email, password, permissions }: UpdateUserPayload,
+  raiseNotFound: () => never
 ): Promise<User> => {
   return db.transact(async (client: PoolClient, commit) => {
     const [formattedSql, values] = getSqlWithValuesForUpdate(
@@ -107,8 +117,7 @@ export const updateUser = async (
     const updateResult = await client.query<UserFromDb>(formattedSql, values);
 
     if (updateResult.rowCount === 0) {
-      // todo: ?
-      throw new Error();
+      raiseNotFound();
     }
 
     const user = updateResult.rows[0];
@@ -138,14 +147,17 @@ export const updateUser = async (
   });
 };
 
-export const deleteUser = async (id: number): Promise<{ ok: true } | null> => {
+export const deleteUser = async (
+  id: number,
+  raiseNotFound: () => never
+): Promise<{ ok: true } | null> => {
   const result = await db.exec({
     sql: deleteUserSql,
     values: [id],
   });
 
   if (result.rowCount === 0) {
-    return null;
+    raiseNotFound();
   }
 
   return { ok: true };
