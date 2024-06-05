@@ -1,4 +1,4 @@
-import { CreateUserPayloadSchema, UpdateUserPayloadSchema } from "domain/users/users.schemas";
+import { CreateUserPayloadSchema, UpdateUserPayloadSchema } from "domain/users/users.schemas.js";
 import { z } from "zod";
 
 export type User = {

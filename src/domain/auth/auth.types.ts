@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { LoginSchema, LogoutSchema } from 'domain/auth/auth.schemas';
+import { LoginSchema, LogoutSchema } from "domain/auth/auth.schemas.js";
+import { z } from "zod";
 
 export type LoginPayload = z.infer<typeof LoginSchema>;
 export type LogoutPayload = z.infer<typeof LogoutSchema>;

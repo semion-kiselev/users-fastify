@@ -1,10 +1,16 @@
-import { raiseNotFound } from "app/@shared/errors/main";
-import { applyValidation } from "app/@shared/utils/apply-validation";
-import { authGuard } from "app/auth/auth-guard.middleware";
-import { UserIdParamSchema } from "app/users/users.schemas";
-import { Permission } from "domain/auth/auth.constants";
-import { CreateUserPayloadSchema, UpdateUserPayloadSchema } from "domain/users/users.schemas";
-import { createUser, deleteUser, getUser, getUsers, updateUser } from "domain/users/users.service";
+import { raiseNotFound } from "app/@shared/errors/main.js";
+import { applyValidation } from "app/@shared/utils/apply-validation.js";
+import { authGuard } from "app/auth/auth-guard.middleware.js";
+import { UserIdParamSchema } from "app/users/users.schemas.js";
+import { Permission } from "domain/auth/auth.constants.js";
+import { CreateUserPayloadSchema, UpdateUserPayloadSchema } from "domain/users/users.schemas.js";
+import {
+  createUser,
+  deleteUser,
+  getUser,
+  getUsers,
+  updateUser,
+} from "domain/users/users.service.js";
 import { Hono } from "hono";
 import { validator } from "hono/validator";
 

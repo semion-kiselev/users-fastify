@@ -1,7 +1,7 @@
-import { db } from "domain/@shared/db/main";
-import { expireUserTokenSql } from "domain/auth/auth.sql";
-import type { LoginPayload, TokenPayloadBase } from "domain/auth/auth.types";
-import { getUserByCredentials } from "domain/users/users.service";
+import { db } from "domain/@shared/db/main.js";
+import { expireUserTokenSql } from "domain/auth/auth.sql.js";
+import type { LoginPayload, TokenPayloadBase } from "domain/auth/auth.types.js";
+import { getUserByCredentials } from "domain/users/users.service.js";
 
 export const login = async (
   { email, password }: LoginPayload,

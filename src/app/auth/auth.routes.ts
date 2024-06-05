@@ -1,8 +1,8 @@
-import { raiseServerError, raiseUnauthorized } from "app/@shared/errors/main";
-import { applyValidation } from "app/@shared/utils/apply-validation";
-import { LoginSchema, LogoutSchema } from "domain/auth/auth.schemas";
-import { login, logout } from "domain/auth/auth.serivce";
-import type { TokenPayloadBase } from "domain/auth/auth.types";
+import { raiseServerError, raiseUnauthorized } from "app/@shared/errors/main.js";
+import { applyValidation } from "app/@shared/utils/apply-validation.js";
+import { LoginSchema, LogoutSchema } from "domain/auth/auth.schemas.js";
+import { login, logout } from "domain/auth/auth.serivce.js";
+import type { TokenPayloadBase } from "domain/auth/auth.types.js";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
 import { validator } from "hono/validator";

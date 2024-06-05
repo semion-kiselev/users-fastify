@@ -1,8 +1,8 @@
-import { raiseForbidden, raiseServerError, raiseUnauthorized } from "app/@shared/errors/main";
-import type { EnvVariables } from "app/@shared/types/env";
-import { Permission } from "domain/auth/auth.constants";
-import type { TokenPayload, TokenUser } from "domain/auth/auth.types";
-import { getUserTokenExpirationTime } from "domain/users/users.service";
+import { raiseForbidden, raiseServerError, raiseUnauthorized } from "app/@shared/errors/main.js";
+import type { EnvVariables } from "app/@shared/types/env.js";
+import { Permission } from "domain/auth/auth.constants.js";
+import type { TokenPayload, TokenUser } from "domain/auth/auth.types.js";
+import { getUserTokenExpirationTime } from "domain/users/users.service.js";
 import { createMiddleware } from "hono/factory";
 import { verify } from "hono/jwt";
 

@@ -1,4 +1,4 @@
-import { raiseBadRequest } from "app/@shared/errors/main";
+import { raiseBadRequest } from "app/@shared/errors/main.js";
 import { ZodObject, type ZodError, type ZodRawShape } from "zod";
 
 export const applyValidation = <T extends ZodRawShape>(value: unknown, schema: ZodObject<T>) => {

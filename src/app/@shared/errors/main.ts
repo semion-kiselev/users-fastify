@@ -1,4 +1,4 @@
-import { type StatusCode } from "app/@shared/types/status-code";
+import { type StatusCode } from "app/@shared/types/status-code.js";
 import { HTTPException } from "hono/http-exception";
 import { getReasonPhrase } from "http-status-codes";
 import type { ZodIssue } from "zod";

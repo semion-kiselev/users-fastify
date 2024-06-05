@@ -7,7 +7,6 @@
     "dev": "tsx watch --env-file=.env src/app/server.ts",
     "build": "swc src -d dist",
     "serve": "node --env-file=.env dist/src/app/server.js",
-    "prod": "npm run build & npm run serve",
     "type:check": "tsc --noEmit",
     "format:check": "prettier 'src/**/*.{ts,json}' --check",
     "format:fix": "prettier 'src/**/*.{ts,json}' --write",

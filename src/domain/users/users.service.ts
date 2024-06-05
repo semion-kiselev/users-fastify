@@ -1,6 +1,6 @@
-import { db } from "domain/@shared/db/main";
-import { toCamelCase } from "domain/@shared/utils/lib";
-import { getSqlWithValuesForUpdate } from "domain/@shared/utils/sql";
+import { db } from "domain/@shared/db/main.js";
+import { toCamelCase } from "domain/@shared/utils/lib.js";
+import { getSqlWithValuesForUpdate } from "domain/@shared/utils/sql.js";
 import {
   addPermissionsSql,
   addUserPermissionsSql,
@@ -13,15 +13,15 @@ import {
   getUsersSql,
   removeUserPermissionsSql,
   updateUserSql,
-} from "domain/users/users.sql";
+} from "domain/users/users.sql.js";
 import type {
   CreateUserPayload,
   UpdateUserPayload,
   User,
   UserFromDb,
   UserWithPermissionsFromDb,
-} from "domain/users/users.types";
-import { normalizeUser } from "domain/users/users.utils";
+} from "domain/users/users.types.js";
+import { normalizeUser } from "domain/users/users.utils.js";
 import type { PoolClient } from "pg";
 import format from "pg-format";
 
