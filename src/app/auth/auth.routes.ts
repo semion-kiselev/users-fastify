@@ -6,7 +6,6 @@ import type { TokenPayloadBase } from "domain/auth/auth.types";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
 import { validator } from "hono/validator";
-import * as process from "process";
 
 export const auth = new Hono();
 
